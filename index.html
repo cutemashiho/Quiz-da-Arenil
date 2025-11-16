@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz sobre a Arenil</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fafc60; /* Azul muito claro */
+            overflow-x: hidden;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #003366; /* Azul escuro */
+        }
+        
+        .quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 51, 102, 0.2); /* Sombra azul */
+            border: 1px solid #b3d9ff; /* Borda azul clara */
+            position: relative;
+            z-index: 1;
+        }
+        
+        h3 {
+            margin-top: 20px;
+            color: #004080; /* Azul médio-escuro */
+        }
+        
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        button {
+            background-color: #0066cc; /* Azul principal */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #004d99; /* Azul mais escuro no hover */
+        }
+        
+        #resultado {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 51, 102, 0.2);
+            margin-top: 20px;
+            display: none;
+            border: 1px solid #b3d9ff;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .links {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #0066cc; /* Azul para links */
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .links a:hover {
+            text-decoration: underline;
+            color: #004d99; /* Azul mais escuro no hover */
+        }
+        
+        /* Estilo para os rótulos das perguntas */
+        label {
+            color: #333;
+        }
+        
+        /* Destaque para a pontuação */
+        #pontuacao strong {
+            color: #0066cc;
+        }
+        
+        /* Estilos para animações */
+        .celebration-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+        }
+        
+        /* Balões */
+        .balloon {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            border-radius: 50%;
+            bottom: -50px;
+            animation: balloon-rise 8s ease-in-out forwards;
+        }
+        
+        .balloon::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        @keyframes balloon-rise {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(20deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Confetes */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            top: -10px;
+            opacity: 0;
+            animation: confetti-fall 5s linear forwards;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz sobre a Arenil</h1>
+    
+    <div class="quiz-container">
+        <form id="quizForm">
+            <h3>1) Quando Criança Arenil tinha um apelido, qual?</h3>
+            <input type="radio" name="q1" value="a" id="q1a"> <label for="q1a">Clarinha</label> <br>
+            <input type="radio" name="q1" value="b" id="q1b"> <label for="q1b">Pretinha</label> <br>
+            <input type="radio" name="q1" value="c" id="q1c"> <label for="q1c">Gordinha</label> <br>
+            <input type="radio" name="q1" value="d" id="q1d"> <label for="q1d">Florzinha</label> <br>
+
+            <h3>2) Na antiga escola ginasial (1965) Arenil teve que se defender dos colegas da cidade que fizeram bullying com ela, com o que ela se defendeu?</h3>
+            <input type="radio" name="q2" value="a" id="q2a"> <label for="q2a">Aranha</label> <br>
+            <input type="radio" name="q2" value="b" id="q2b"> <label for="q2b">Marimbomdo</label> <br>
+            <input type="radio" name="q2" value="c" id="q2c"> <label for="q2c">Besouro</label> <br>
+            <input type="radio" name="q2" value="d" id="q2d"> <label for="q2d">taturanas</label> <br>
+
+            <h3>3) Na fase adulta Arenil foi confundida em Cuiabá por sua elegância, paetê na roupa e seus exuberantes cabelos e batom vermelho com uma cantora famosa que visitava a capital, como quem Dona Arenil foi confundida?</h3>
+            <input type="radio" name="q3" value="a" id="q3a"> <label for="q3a">Rita Lee</label> <br>
+            <input type="radio" name="q3" value="b" id="q3b"> <label for="q3b">Bete Carvalho</label> <br>
+            <input type="radio" name="q3" value="c" id="q3c"> <label for="q3c">Alcione</label> <br>
+            <input type="radio" name="q3" value="d" id="q3d"> <label for="q3d">Ivone Lara</label> <br>
+
+            <br>
+            <div class="btn">
+                <button type="submit">Enviar Respostas</button>
+            </div>
+        </form>
+    </div>
+    
+    <div id="resultado">
+        <h1>Resultado do Quiz</h1>
+        <p id="pontuacao"></p>
+        <p id="mensagem"></p>
+        <div class="links">
+            <a href="#" id="tentarNovamente">Tentar novamente</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('quizForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Gabarito das respostas
+            const gabarito = {
+                "q1": "b", 
+                "q2": "b",
+                "q3": "c",
+            };
+            
+            let pontos = 0;
+            
+            // Verificar cada pergunta
+            for (const pergunta in gabarito) {
+                const respostaSelecionada = document.querySelector(`input[name="${pergunta}"]:checked`);
+                
+                if (respostaSelecionada && respostaSelecionada.value === gabarito[pergunta]) {
+                    pontos++;
+                }
+            }
+            
+            // Exibir resultado
+            const totalPerguntas = Object.keys(gabarito).length;
+            document.getElementById('pontuacao').innerHTML = `Você acertou <strong>${pontos}</strong> de ${totalPerguntas} perguntas`;
+            
+            let mensagem = "";
+            if (pontos === 3) {
+                mensagem = "Excelente! Você conhece muito bem a Arenil!";
+                // Ativar animação de balões e confetes
+                createCelebration();
+            } else if (pontos >= 2) {
+                mensagem = "Bom trabalho! Mas ainda pode melhorar.";
+            } else {
+                mensagem = "Que pena, não foi dessa vez!";
+            }
+            
+            document.getElementById('mensagem').textContent = mensagem;
+            
+            // Mostrar o resultado e esconder o formulário
+            document.querySelector('.quiz-container').style.display = 'none';
+            document.getElementById('resultado').style.display = 'block';
+        });
+        
+        // Botão "Tentar novamente"
+        document.getElementById('tentarNovamente').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.querySelector('.quiz-container').style.display = 'block';
+            document.getElementById('resultado').style.display = 'none';
+            document.getElementById('quizForm').reset();
+            
+            // Remover animações se existirem
+            const celebrationContainer = document.querySelector('.celebration-container');
+            if (celebrationContainer) {
+                celebrationContainer.remove();
+            }
+        });
+        
+        // Função para criar animação de balões e confetes
+        function createCelebration() {
+            // Criar container para as animações
+            const celebrationContainer = document.createElement('div');
+            celebrationContainer.className = 'celebration-container';
+            document.body.appendChild(celebrationContainer);
+            
+            // Cores para balões e confetes
+            const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff8800'];
+            
+            // Criar balões
+            for (let i = 0; i < 30; i++) {
+                createBalloon(celebrationContainer, colors);
+            }
+            
+            // Criar confetes
+            for (let i = 0; i < 150; i++) {
+                createConfetti(celebrationContainer, colors);
+            }
+        }
+        
+        // Função para criar um balão
+        function createBalloon(container, colors) {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            
+            // Posição horizontal aleatória
+            const left = Math.random() * 100;
+            balloon.style.left = `${left}vw`;
+            
+            // Cor aleatória
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            balloon.style.backgroundColor = color;
+            
+            // Atraso aleatório para animação
+            const delay = Math.random() * 5;
+            balloon.style.animationDelay = `${delay}s`;
+            
+            // Duração aleatória para animação
+            const duration = 5 + Math.random() * 5;
+            balloon.style.animationDuration = `${duration}s`;
+            
+            container.appendChild(balloon);
+            
+            // Remover balão após a animação
+            setTimeout(() => {
+                if (balloon.parentNode) {
+                    balloon.remove();
+                }
+            }, (duration + delay) * 1000);
+        }
+        
+        // Função para criar um confete
+        function createConfetti(container, colors) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            
+            // Posição horizontal aleatória
+            const left = Math.random() * 100;
+            confetti.style.left = `${left}vw`;
+            
+            // Cor aleatória
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.backgroundColor = color;
+            
+            // Atraso aleatório para animação
+            const delay = Math.random() * 5;
+            confetti.style.animationDelay = `${delay}s`;
+            
+            // Duração aleatória para animação
+            const duration = 3 + Math.random() * 4;
+            confetti.style.animationDuration = `${duration}s`;
+            
+            // Forma aleatória (quadrado ou retângulo)
+            const size = 5 + Math.random() * 10;
+            const ratio = 0.5 + Math.random() * 1.5;
+            
+            if (Math.random() > 0.5) {
+                // Quadrado
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+            } else {
+                // Retângulo
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size * ratio}px`;
+            }
+            
+            container.appendChild(confetti);
+            
+            // Remover confete após a animação
+            setTimeout(() => {
+                if (confetti.parentNode) {
+                    confetti.remove();
+                }
+            }, (duration + delay) * 1000);
+        }
+    </script>
+</body>
+</html>
